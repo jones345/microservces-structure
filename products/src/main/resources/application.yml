@@ -1,0 +1,53 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+server:
+  port: 9383
+spring:
+  application:
+    name: BTC-PRODUCTS-SERVICES
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    password: BTC
+    url: jdbc:postgresql://localhost:5432/btc_products
+    username: BTC
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+  liquibase:
+    drop-first: false
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+  sleuth:
+    integration:
+      enabled: true
+    sampler:
+      probability: 1
+  zipkin:
+    base-url: http://localhost:9411/
+token:
+  secret: BTC
+  header: Authorization
+  expiration: 33666000000000
+web:
+  url: http://localhost:4200
+gateway:
+  messaging:
+    base: http://localhost:8281/messaging
+security:
+  base:
+    url: http://localhost:8281/bitri-security
+notifications:
+  email-group: pmogorosi@bitri.co.bw #TODO Replace with Bocra email group for admin/business tech admin
+  tech-admins: gtau@gmail.com #TODO Replace with Bocra email group for admin/business tech admin
+

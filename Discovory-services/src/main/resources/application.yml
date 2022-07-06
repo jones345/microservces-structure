@@ -1,0 +1,50 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  cloud.gateway:
+    discovery:
+      locator:
+        enabled: true
+        lowerCaseServiceId: true
+    routes:
+      - id: BTC-SECURITY-SERVICES
+        uri: lb://BTC-SECURITY-SERVICES
+        predicates:
+          - Path=/api/**
+      - id: BTC-PRODUCTS-SERVICES
+        uri: lb://BTC-PRODUCTS-SERVICES
+        predicates:
+          - Path=/api/**
+      - id: BTC-ORDERS-SERVICES
+        uri: lb://BTC-ORDERS-SERVICES
+        predicates:
+          - Path=/api/**
+      - id: BTC-PAYMENT-SERVICES
+        uri: lb://BTC-PAYMENT-SERVICES
+        predicates:
+          - Path=/api/**
+
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins:
+              - "*"
+            allowed-methods:
+              - "*"
+            allowed-headers:
+              - "*"
+            exposed-headers:
+                - "*"
+
+
+server:
+  port: 9297
+spring:
+  application:
+    name: BTC-DISCOVERY-SERVICES
+

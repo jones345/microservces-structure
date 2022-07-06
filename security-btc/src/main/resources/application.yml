@@ -1,0 +1,74 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    app: security-btc
+    instanceId: security-btc
+    hostname: localhost
+    ipAddr: localhost
+    statusPageUrl: http://localhost:9183/actuator/info
+    healthCheckUrl: http://localhost:9183/actuator/health
+    port:
+      ${port}
+    homePageUrl: http://localhost:9183
+    vipAddress: BTC-SECURITY-SERVICES
+    secureVipAddress: BTC-SECURITY-SERVICES
+    dataCenterInfo:
+      name: MyOwn
+    metadata:
+      version: 1.0
+      buildNumber: 1
+      buildDate: ${buildDate}
+      vendor: ${vendor}
+      organization: ${organization}
+      license: ${license}
+server:
+  port: 9183
+spring:
+  application:
+    name: BTC-SECURITY-SERVICES
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    password: BTC
+    url: jdbc:postgresql://localhost:5432/btc_security
+    username: BTC
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+  liquibase:
+    drop-first: false
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+#  sleuth:
+#    integration:
+#      enabled: true
+#    sampler:
+#      probability: 1
+#  zipkin:
+#    base-url: http://localhost:9411/
+#token:
+#  secret: BTC
+#  header: Authorization
+#  expiration: 33666000000000
+#web:
+#  url: http://localhost:4200
+#gateway:
+#  messaging:
+#    base: http://localhost:8281/messaging
+#security:
+#  base:
+#    url: http://localhost:8281/bitri-security
+#notifications:
+#  email-group: pmogorosi@bitri.co.bw #TODO Replace with Bocra email group for admin/business tech admin
+#  tech-admins: gtau@gmail.com #TODO Replace with Bocra email group for admin/business tech admin
+
